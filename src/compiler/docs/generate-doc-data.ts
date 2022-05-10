@@ -227,6 +227,11 @@ const getDocsEvents = (events: d.ComponentCompilerEvent[]): d.JsonDocsEvent[] =>
     }));
 };
 
+/**
+ *
+ * @param cmpMeta
+ * @returns
+ */
 const getDocsStyles = (cmpMeta: d.ComponentCompilerMeta): d.JsonDocsStyle[] => {
   if (!cmpMeta.styleDocs) {
     return [];

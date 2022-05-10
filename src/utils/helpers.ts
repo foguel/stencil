@@ -28,12 +28,22 @@ export const isComplexType = (o: any) => {
   return o === 'object' || o === 'function';
 };
 
+/**
+ *
+ * @param array
+ * @param prop
+ * @returns
+ */
 export const sortBy = <T>(array: T[], prop: (item: T) => string | number) => {
   return array.slice().sort((a, b) => {
     const nameA = prop(a);
     const nameB = prop(b);
-    if (nameA < nameB) return -1;
-    if (nameA > nameB) return 1;
+    if (nameA < nameB) {
+      return -1
+    }
+    if (nameA > nameB) {
+      return 1;
+    }
     return 0;
   });
 };

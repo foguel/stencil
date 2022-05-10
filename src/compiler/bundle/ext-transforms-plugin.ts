@@ -7,6 +7,14 @@ import { parseImportPath } from '../transformers/stencil-import-path';
 import type { Plugin } from 'rollup';
 import { runPluginTransformsEsmImports } from '../plugin/plugin';
 
+/**
+ *
+ * @param config
+ * @param compilerCtx
+ * @param buildCtx
+ * @param bundleOpts
+ * @returns
+ */
 export const extTransformsPlugin = (
   config: d.Config,
   compilerCtx: d.CompilerCtx,

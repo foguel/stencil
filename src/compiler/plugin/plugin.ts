@@ -57,13 +57,22 @@ export const runPluginLoad = async (pluginCtx: PluginCtx, id: string) => {
   return pluginCtx.fs.readFile(id);
 };
 
+/**
+ *
+ * @param config
+ * @param compilerCtx
+ * @param buildCtx
+ * @param id
+ * @param cmp
+ * @returns
+ */
 export const runPluginTransforms = async (
   config: d.Config,
   compilerCtx: d.CompilerCtx,
   buildCtx: d.BuildCtx,
   id: string,
   cmp?: d.ComponentCompilerMeta
-) => {
+): Promise<d.PluginTransformResults> => {
   const pluginCtx: PluginCtx = {
     config: config,
     sys: config.sys,
