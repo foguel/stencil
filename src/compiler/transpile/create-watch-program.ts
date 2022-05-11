@@ -51,14 +51,18 @@ export const createTsWatchProgram = async (
   tsWatchHost.afterProgramCreate = async (tsBuilder) => {
     lastTsBuilder = tsBuilder;
     isRunning = true;
+    console.trace('src/compiler/transpile/create-watch-program.ts#afterProgramCreate')
     await buildCallback(tsBuilder);
+    console.log('src/compiler/transpile/create-watch-program.ts#afterProgramCreate - COMPLETE')
     isRunning = false;
   };
 
   return {
     program: ts.createWatchProgram(tsWatchHost),
     rebuild: () => {
+      console.trace('src/compiler/transpile/create-watch-program.ts#rebuild')
       if (lastTsBuilder && !timeoutId) {
+        console.log('src/compiler/transpile/create-watch-program.ts#afterProgramCreate - SET_TIMEOUT')
         rebuildTimer = tsWatchSys.setTimeout(() => tsWatchHost.afterProgramCreate(lastTsBuilder), 300);
       }
     },

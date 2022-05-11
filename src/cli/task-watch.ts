@@ -12,6 +12,7 @@ export const taskWatch = async (coreCompiler: CoreCompiler, config: Config) => {
 
     const versionChecker = startCheckVersion(config, coreCompiler.version);
 
+    console.trace('src/cli/task-watch#taskWatch')
     const compiler = await coreCompiler.createCompiler(config);
     const watcher = await compiler.createWatcher();
 

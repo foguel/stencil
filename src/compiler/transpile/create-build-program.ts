@@ -54,13 +54,15 @@ export const createTsBuildProgram = async (
       config.logger.debug('watch reportDiagnostic:' + reportDiagnostic.messageText);
     },
     (reportWatchStatus) => {
-      config.logger.debug(reportWatchStatus.messageText);
+      config.logger.debug('watch reportWatchStatus:' + reportWatchStatus.messageText);
     }
   );
 
   tsWatchHost.afterProgramCreate = async (tsBuilder) => {
     isRunning = true;
+    console.trace('src/compiler/transpile/create-build-program.ts#afterProgramCreate')
     await buildCallback(tsBuilder);
+    console.trace('src/compiler/transpile/create-build-program.ts#afterProgramCreate - COMPLETE')
     isRunning = false;
   };
   return ts.createWatchProgram(tsWatchHost);
