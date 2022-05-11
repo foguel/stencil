@@ -16,6 +16,7 @@ export const build = async (
   tsBuilder: ts.BuilderProgram
 ) => {
   try {
+    console.trace(`src/compiler/build/build.ts#build`)
     // reset process.cwd() for 3rd-party plugins
     process.chdir(config.rootDir);
 

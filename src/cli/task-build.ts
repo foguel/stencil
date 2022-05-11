@@ -20,7 +20,7 @@ export const taskBuild = async (coreCompiler: CoreCompiler, config: d.Config, sy
     startupCompilerLog(coreCompiler, config);
 
     const versionChecker = startCheckVersion(config, coreCompiler.version);
-
+    console.trace(`src/cli/task-build.ts#taskBuild`)
     const compiler = await coreCompiler.createCompiler(config);
     const results = await compiler.build();
 

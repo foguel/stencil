@@ -10,6 +10,7 @@ export const taskDocs = async (coreCompiler: CoreCompiler, config: Config) => {
 
   startupCompilerLog(coreCompiler, config);
 
+  console.trace(`src/cli/task-docs.ts#taskDocs`)
   const compiler = await coreCompiler.createCompiler(config);
   await compiler.build();
 

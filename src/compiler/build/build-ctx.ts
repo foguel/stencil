@@ -70,6 +70,7 @@ export class BuildContext implements d.BuildCtx {
   }
 
   start() {
+    console.trace(`src/compiler/build/build-ctx.ts#start`)
     // get the build id from the incremented activeBuildId
     // print out a good message
     const msg = `${this.isRebuild ? 'rebuild' : 'build'}, ${this.config.fsNamespace}, ${

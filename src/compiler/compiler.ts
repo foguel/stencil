@@ -40,6 +40,7 @@ export const createCompiler = async (config: Config) => {
   }
   patchTypescript(config, compilerCtx.fs);
 
+  console.trace(`src/compiler/compiler.ts#createCompiler`)
   const build = () => createFullBuild(config, compilerCtx);
 
   const createWatcher = () => createWatchBuild(config, compilerCtx);
