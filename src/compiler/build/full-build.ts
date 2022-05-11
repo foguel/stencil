@@ -10,7 +10,7 @@ export const createFullBuild = async (config: d.Config, compilerCtx: d.CompilerC
 
     compilerCtx.events.on('fileUpdate', (p) => {
       config.logger.debug(`fileUpdate: ${p}`);
-      console.trace('src/compiler/build/full-build.ts#fileUpdateEvent')
+      console.trace('src/compiler/build/full-build.ts#fileUpdateEvent -', p)
       compilerCtx.fs.clearFileCache(p);
     });
 
