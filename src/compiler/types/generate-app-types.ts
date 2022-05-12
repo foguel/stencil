@@ -23,6 +23,7 @@ export const generateAppTypes = async (
   buildCtx: d.BuildCtx,
   destination: string
 ): Promise<boolean> => {
+  console.trace('src/compiler/types/generate-app-types.ts#generateAppTypes()')
   // only gather components that are still root ts files we've found and have component metadata
   // the compilerCtx cache may still have files that may have been deleted/renamed
   const timespan = buildCtx.createTimeSpan(`generated app types started`, true);

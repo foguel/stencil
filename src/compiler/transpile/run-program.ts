@@ -70,8 +70,10 @@ export const runTsProgram = async (
   }
 
   // create the components.d.ts file and write to disk
-  const hasTypesChanged = await generateAppTypes(config, compilerCtx, buildCtx, 'src');
-  if (hasTypesChanged) {
+  console.log('src/compiler/transpile/run-program.ts#runTsProgram() - about to generate types')
+  const haveTypesChanged = await generateAppTypes(config, compilerCtx, buildCtx, 'src');
+  console.log('src/compiler/transpile/run-program.ts#runTsProgram() - did types change:', haveTypesChanged)
+  if (haveTypesChanged) {
     return true;
   }
 
@@ -88,6 +90,7 @@ export const runTsProgram = async (
         return Promise.all(
           typesOutputTarget.map(async (o) => {
             const distPath = join(o.typesDir, relativeEmitFilepath);
+            console.log('src/compiler/transpile/run-program.ts#runTsProgram() - about to read and emit on path', distPath)
             let dtsContent = await compilerCtx.fs.readFile(srcRootDtsFilePath);
             dtsContent = updateStencilTypesImports(o.typesDir, distPath, dtsContent);
             await compilerCtx.fs.writeFile(distPath, dtsContent);
