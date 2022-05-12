@@ -59,10 +59,14 @@ const generateTypesOutput = async (
   );
 
   const distPath = outputTarget.typesDir;
+  console.log('src/compiler/types/generate-types.ts#generateTypesOutput() - begin')
   await generateAppTypes(config, compilerCtx, buildCtx, distPath);
+  console.log('src/compiler/types/generate-types.ts#generateTypesOutput() - initial complete')
 
   if (distDtsFilePath) {
+    console.log('src/compiler/types/generate-types.ts#generateTypesOutput() - begin output targets')
     await generateCustomElementsTypes(config, compilerCtx, buildCtx, distDtsFilePath);
     await generateCustomElementsBundleTypes(config, compilerCtx, buildCtx, distDtsFilePath);
+    console.log('src/compiler/types/generate-types.ts#generateTypesOutput() - end output targets')
   }
 };
