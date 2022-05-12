@@ -74,6 +74,7 @@ export const runTsProgram = async (
   const haveTypesChanged = await generateAppTypes(config, compilerCtx, buildCtx, 'src');
   console.log('src/compiler/transpile/run-program.ts#runTsProgram() - did types change:', haveTypesChanged)
   if (haveTypesChanged) {
+    console.trace('src/compiler/transpile/run-program.ts#runTsProgram() - did types change:', haveTypesChanged)
     return true;
   }
 
