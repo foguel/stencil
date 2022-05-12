@@ -434,6 +434,7 @@ export function createNodeSys(c: { process?: any } = {}) {
         const tsFileWatcher = tsSysWatchDirectory(
           p,
           (fileName) => {
+            console.trace('src/sys/node/node-sys.ts#setupCompiler()#watchDirectory() - callback', p, fileName)
             callback(normalizePath(fileName), 'fileUpdate');
           },
           recursive
@@ -460,6 +461,7 @@ export function createNodeSys(c: { process?: any } = {}) {
             callback(fileName, 'fileAdd');
             sys.events.emit('fileAdd', fileName);
           } else if (tsEventKind === ts.FileWatcherEventKind.Changed) {
+            console.trace('src/sys/node/node-sys.ts#setupCompiler()#watchfile()', p, fileName)
             callback(fileName, 'fileUpdate');
             sys.events.emit('fileUpdate', fileName);
           } else if (tsEventKind === ts.FileWatcherEventKind.Deleted) {
