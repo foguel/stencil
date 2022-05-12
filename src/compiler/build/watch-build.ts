@@ -93,6 +93,7 @@ export const createWatchBuild = async (config: d.Config, compilerCtx: d.Compiler
           filesAdded.add(p);
           break;
         case 'fileUpdate':
+          console.trace('src/compiler/build/watch-build#createWatchBuild.onFsChange')
           filesUpdated.add(p);
           break;
         case 'fileDelete':

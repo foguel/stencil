@@ -476,6 +476,7 @@ export const createSystem = (c?: { logger?: Logger }) => {
   };
 
   const writeFileSync = (p: string, data: string) => {
+    console.trace('src/compiler/sys/stencil-sys.ts#createSystem()#writeFileSync()', p)
     p = normalize(p);
     const results: CompilerSystemWriteFileResults = {
       path: p,
@@ -483,7 +484,9 @@ export const createSystem = (c?: { logger?: Logger }) => {
     };
     const item = items.get(p);
     if (item) {
+      console.log('a hit was found for p:', p)
       const hasChanged = item.data !== data;
+      console.log('has the data changed?', hasChanged)
       item.data = data;
       if (hasChanged && item.watcherCallbacks) {
         for (const watcherCallback of item.watcherCallbacks) {
