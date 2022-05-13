@@ -23,6 +23,7 @@ export const generateAppTypes = async (
   buildCtx: d.BuildCtx,
   destination: string
 ): Promise<boolean> => {
+  // this gets called 2x on the reproduction. it has 2 call sites, both are being called 2x - 1,2 1,2
   console.trace('src/compiler/types/generate-app-types.ts#generateAppTypes() - destination', destination)
   // only gather components that are still root ts files we've found and have component metadata
   // the compilerCtx cache may still have files that may have been deleted/renamed
