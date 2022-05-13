@@ -31,6 +31,7 @@ export const createFullBuild = async (config: d.Config, compilerCtx: d.CompilerC
       }
     };
 
+    console.trace('src/compiler/build/full-build.ts#preCreateTsBuildProgram')
     createTsBuildProgram(config, onBuild).then((program) => {
       console.trace('src/compiler/build/full-build.ts#postCreateTsBuildProgram')
       tsWatchProgram = program;

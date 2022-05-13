@@ -13,6 +13,7 @@ import { isFunction } from '@utils';
 import ts from 'typescript';
 
 export const createCompiler = async (config: Config) => {
+  console.trace(`src/compiler/compiler.ts#createCompiler()`)
   // actual compiler code
   // could be in a web worker on the browser
   // or the main thread in node
