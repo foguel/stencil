@@ -70,7 +70,7 @@ export const runTsProgram = async (
   }
 
   // create the components.d.ts file and write to disk
-  console.log('src/compiler/transpile/run-program.ts#runTsProgram() - about to generate types')
+  console.trace('src/compiler/transpile/run-program.ts#runTsProgram() - about to generate types')
   const haveTypesChanged = await generateAppTypes(config, compilerCtx, buildCtx, 'src');
   console.log('src/compiler/transpile/run-program.ts#runTsProgram() - did types change:', haveTypesChanged)
   if (haveTypesChanged) {
