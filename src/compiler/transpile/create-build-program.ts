@@ -17,6 +17,8 @@ export const createTsBuildProgram = async (
 
     watchFile(path, callback) {
       if (path.endsWith(`/${GENERATED_DTS}`)) {
+        // potentially 2 watches being created?
+        console.trace(`src/compiler/transpile/create-build-program.ts#createTsBuildProgram()#watchFile(path) - ${path}`);
         return ts.sys.watchFile(path, callback);
       }
       return {
