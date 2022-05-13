@@ -23,6 +23,11 @@ export const writeBuild = async (config: d.Config, compilerCtx: d.CompilerCtx, b
     // kick off writing the cached file stuff
     // await compilerCtx.cache.commit();
     buildCtx.debug(`in-memory-fs: ${compilerCtx.fs.getMemoryStats()}`);
+    console.trace(`src/compiler/build/write-build.ts#writeBuild() - memory stats: ${compilerCtx.fs.getMemoryStats()}`)
+    console.log(`src/compiler/build/write-build.ts#writeBuild() - commitResults.filesWritten: ${commitResults.filesWritten}`)
+    console.log(`src/compiler/build/write-build.ts#filesDeleted() - commitResults.filesWritten: ${commitResults.filesDeleted}`)
+    console.log(`src/compiler/build/write-build.ts#dirsDeleted() - commitResults.filesWritten: ${commitResults.dirsDeleted}`)
+    console.log(`src/compiler/build/write-build.ts#dirsAdded() - commitResults.filesWritten: ${commitResults.dirsAdded}`)
     // buildCtx.debug(`cache: ${compilerCtx.cache.getMemoryStats()}`);
 
     await outputServiceWorkers(config, buildCtx), await validateBuildFiles(config, compilerCtx, buildCtx);
