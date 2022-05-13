@@ -31,6 +31,7 @@ export const buildFinish = async (buildCtx: d.BuildCtx): Promise<d.CompilerBuild
  * @returns the build results
  */
 export const buildAbort = (buildCtx: d.BuildCtx): Promise<d.CompilerBuildResults> => {
+  console.trace(`build abort!`)
   return buildDone(buildCtx.config, buildCtx.compilerCtx, buildCtx, true);
 };
 

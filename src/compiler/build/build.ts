@@ -41,6 +41,7 @@ export const build = async (
     if (buildCtx.hasError) return buildAbort(buildCtx);
 
     if (config.watch && componentDtsChanged) {
+      console.error(`RYAN::Sentinel - silent abort for watch only`)
       // silent abort for watch mode only
       return null;
     }
@@ -55,6 +56,7 @@ export const build = async (
 
     // write outputs
     await buildCtx.stylesPromise;
+    console.trace(`src/compiler/build/build.ts#build() - about to writeBuild`)
     await writeBuild(config, compilerCtx, buildCtx);
   } catch (e: any) {
     // ¯\_(ツ)_/¯
