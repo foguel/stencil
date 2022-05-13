@@ -7,6 +7,7 @@ export const createTsBuildProgram = async (
   config: d.Config,
   buildCallback: (tsBuilder: ts.BuilderProgram) => Promise<void>
 ) => {
+  console.trace(`src/compiler/transpile/create-build-program.ts#createTsBuildProgram() - init`);
   let isRunning = false;
   let timeoutId: any;
 
