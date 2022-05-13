@@ -61,14 +61,15 @@ export const createTsBuildProgram = async (
     }
   );
 
-  const id = Math.ceil(Math.random() * 1_000_000);
+  const id1 = Math.ceil(Math.random() * 1_000_000);
   tsWatchHost.afterProgramCreate = async (tsBuilder) => {
+    const id2 = Math.ceil(Math.random() * 1_000_000);
     isRunning = true;
-    console.trace('src/compiler/transpile/create-build-program.ts#afterProgramCreate', id)
+    console.trace('src/compiler/transpile/create-build-program.ts#afterProgramCreate', id1, id2)
     await buildCallback(tsBuilder);
-    console.trace('src/compiler/transpile/create-build-program.ts#afterProgramCreate - COMPLETE', id)
+    console.trace('src/compiler/transpile/create-build-program.ts#afterProgramCreate - COMPLETE', id1, id2)
     isRunning = false;
   };
-  console.trace('src/compiler/transpile/create-build-program.ts#createWatchProgram', id)
+  console.trace('src/compiler/transpile/create-build-program.ts#createWatchProgram', id1)
   return ts.createWatchProgram(tsWatchHost);
 };
