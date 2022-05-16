@@ -24,10 +24,10 @@ export const writeBuild = async (config: d.Config, compilerCtx: d.CompilerCtx, b
     // await compilerCtx.cache.commit();
     buildCtx.debug(`in-memory-fs: ${compilerCtx.fs.getMemoryStats()}`);
     console.trace(`src/compiler/build/write-build.ts#writeBuild() - memory stats: ${compilerCtx.fs.getMemoryStats()}`)
-    console.log(`src/compiler/build/write-build.ts#writeBuild() - commitResults.filesWritten: ${commitResults.filesWritten.join('\n')}`)
-    console.log(`src/compiler/build/write-build.ts#filesDeleted() - commitResults.filesDeleted: ${commitResults.filesDeleted.join('\n')}`)
-    console.log(`src/compiler/build/write-build.ts#dirsDeleted() - commitResults.dirsDeleted: ${commitResults.dirsDeleted.join('\n')}`)
-    console.log(`src/compiler/build/write-build.ts#dirsAdded() - commitResults.dirsAdded: ${commitResults.dirsAdded.join('\n')}`)
+    console.log(`src/compiler/build/write-build.ts#writeBuild() - commitResults.filesWritten: ${commitResults.filesWritten.sort().join('\n')}`)
+    console.log(`src/compiler/build/write-build.ts#filesDeleted() - commitResults.filesDeleted: ${commitResults.filesDeleted.sort().join('\n')}`)
+    console.log(`src/compiler/build/write-build.ts#dirsDeleted() - commitResults.dirsDeleted: ${commitResults.dirsDeleted.sort().join('\n')}`)
+    console.log(`src/compiler/build/write-build.ts#dirsAdded() - commitResults.dirsAdded: ${commitResults.dirsAdded.sort().join('\n')}`)
     // buildCtx.debug(`cache: ${compilerCtx.cache.getMemoryStats()}`);
 
     await outputServiceWorkers(config, buildCtx), await validateBuildFiles(config, compilerCtx, buildCtx);

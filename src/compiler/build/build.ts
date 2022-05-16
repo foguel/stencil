@@ -58,6 +58,7 @@ export const build = async (
     await buildCtx.stylesPromise;
     console.trace(`src/compiler/build/build.ts#build() - about to writeBuild`)
     await writeBuild(config, compilerCtx, buildCtx);
+    console.trace(`src/compiler/build/build.ts#build() - writeBuild complete`)
   } catch (e: any) {
     // ¯\_(ツ)_/¯
     catchError(buildCtx.diagnostics, e);
