@@ -23,11 +23,11 @@ export const createTsBuildProgram = async (
     ...ts.sys,
 
     /** Used to watch changes in source files, missing files needed to update the program or config file */
-    watchFile(path, _callback) {
+    watchFile(path, callback) {
       if (path.endsWith(`/${GENERATED_DTS}`)) {
         // potentially 2 watches being created?
         console.trace(`src/compiler/transpile/create-build-program.ts#createTsBuildProgram()#watchFile(path) - ${path}`);
-        // return ts.sys.watchFile(path, callback);
+        return ts.sys.watchFile(path, callback);
       }
       return {
         close() {},
