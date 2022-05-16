@@ -144,6 +144,7 @@ const patchTsSystemWatch = (stencilSys: d.CompilerSystem, tsSys: ts.System) => {
 
   tsSys.watchFile = (p, cb) => {
     const watcher = stencilSys.watchFile(p, (filePath, eventKind) => {
+      console.trace(`src/compiler/sys/typescript/typescript-sys.ts#tsSys.watchFile - event: ${eventKind}, file: ${p}`)
       if (eventKind === 'fileAdd') {
         cb(filePath, ts.FileWatcherEventKind.Created);
       } else if (eventKind === 'fileUpdate') {
