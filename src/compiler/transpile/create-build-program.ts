@@ -88,11 +88,11 @@ export const createTsBuildProgram = async (
   const id1 = Math.ceil(Math.random() * 1_000_000);
   tsWatchHost.afterProgramCreate = async (tsBuilder: ts.EmitAndSemanticDiagnosticsBuilderProgram) => {
     const id2 = Math.ceil(Math.random() * 1_000_000);
-    console.trace('src/compiler/transpile/create-build-program.ts#afterProgramCreate - setting isRunning: true', id1, id2)
+    console.trace(`src/compiler/transpile/create-build-program.ts#afterProgramCreate id1: ${id1}, id2: ${id2}- setting isRunning: true (was ${isRunning})`)
     isRunning = true;
     console.trace('src/compiler/transpile/create-build-program.ts#afterProgramCreate', id1, id2)
     await buildCallback(tsBuilder);
-    console.trace('src/compiler/transpile/create-build-program.ts#afterProgramCreate - setting isRunning: false', id1, id2)
+    console.trace(`src/compiler/transpile/create-build-program.ts#afterProgramCreate id1: ${id1}, id2: ${id2}- setting isRunning: false (was ${isRunning})`)
     isRunning = false;
     console.trace('src/compiler/transpile/create-build-program.ts#afterProgramCreate - COMPLETE', id1, id2)
   };
