@@ -22,21 +22,24 @@ export const createTsBuildProgram = async (
   const tsWatchSys: ts.System = {
     ...ts.sys,
 
-    watchFile(path, callback) {
+    /** Used to watch changes in source files, missing files needed to update the program or config file */
+    watchFile(path, _callback) {
       if (path.endsWith(`/${GENERATED_DTS}`)) {
         // potentially 2 watches being created?
         console.trace(`src/compiler/transpile/create-build-program.ts#createTsBuildProgram()#watchFile(path) - ${path}`);
-        return ts.sys.watchFile(path, callback);
+        // return ts.sys.watchFile(path, callback);
       }
       return {
         close() {},
       };
     },
+    /** Used to watch resolved module's failed lookup locations, config file specs, type roots where auto type reference directives are added */
     watchDirectory() {
       return {
         close() {},
       };
     },
+    /** If provided, will be used to set delayed compilation, so that multiple changes in short span are compiled together */
     setTimeout(callback: (...args: any[]) => void , watchTimeoutMs: number) {
       timeoutId = setInterval(() => {
         if (!isRunning) {
@@ -51,7 +54,7 @@ export const createTsBuildProgram = async (
       console.log(`src/compiler/transpile/create-build-program.ts#setTimeout - timeoutId ${timeoutId}`);
       return timeoutId;
     },
-
+    /** If provided, will be used to reset existing delayed compilation */
     clearTimeout(id) {
       // stack traces for each of these 2x calls are exactly the same
       // Trace: src/compiler/transpile/create-build-program.ts#setTimeout - clearTimeout: 9211
