@@ -1,7 +1,7 @@
 import type * as d from '../../declarations';
 import { basename, join, relative } from 'path';
 import { convertDecoratorsToStatic } from '../transformers/decorators-to-static/convert-decorators';
-import { generateAppTypes } from '../types/generate-app-types';
+// import { generateAppTypes } from '../types/generate-app-types';
 import { getComponentsFromModules, isOutputTargetDistTypes } from '../output-targets/output-utils';
 import { loadTypeScriptDiagnostics, normalizePath } from '@utils';
 import { resolveComponentDependencies } from '../entries/resolve-component-dependencies';
@@ -10,6 +10,8 @@ import { updateComponentBuildConditionals } from '../app-core/app-data';
 import { updateModule } from '../transformers/static-to-meta/parse-static';
 import { updateStencilTypesImports } from '../types/stencil-types';
 import { validateTranspiledComponents } from './validate-components';
+
+let onceFalse: boolean = false;
 
 export const runTsProgram = async (
   config: d.Config,
@@ -71,9 +73,11 @@ export const runTsProgram = async (
 
   // create the components.d.ts file and write to disk
   console.trace('src/compiler/transpile/run-program.ts#runTsProgram() - about to generate types')
-  const haveTypesChanged = await generateAppTypes(config, compilerCtx, buildCtx, 'src');
+  // was able to repro with this 'false' first time, then 'true' the second time
+  const haveTypesChanged = onceFalse; //await generateAppTypes(config, compilerCtx, buildCtx, 'src');
   console.log('src/compiler/transpile/run-program.ts#runTsProgram() - did types change:', haveTypesChanged)
   if (haveTypesChanged) {
+    onceFalse = true;
     console.trace('src/compiler/transpile/run-program.ts#runTsProgram() - did types change:', haveTypesChanged)
     return true;
   }
