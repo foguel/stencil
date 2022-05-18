@@ -29,12 +29,14 @@ export const generateAppTypes = async (
   // the compilerCtx cache may still have files that may have been deleted/renamed
   const timespan = buildCtx.createTimeSpan(`generated app types started`, true);
   const areTypesInternal = destination === 'src';
+  console.trace('src/compiler/types/generate-app-types.ts#generateAppTypes() - areTypesInternal', areTypesInternal)
 
   // Generate d.ts files for component types
   let componentTypesFileContent = generateComponentTypesFile(config, buildCtx, areTypesInternal);
 
   // immediately write the components.d.ts file to disk and put it into fs memory
   let componentsDtsFilePath = getComponentsDtsSrcFilePath(config);
+  console.trace('src/compiler/types/generate-app-types.ts#generateAppTypes() - will write to', componentsDtsFilePath)
 
   if (!areTypesInternal) {
     componentsDtsFilePath = resolve(destination, GENERATED_DTS);
@@ -50,6 +52,7 @@ export const generateAppTypes = async (
   const writeResults = await compilerCtx.fs.writeFile(componentsDtsFilePath, componentTypesFileContent, {
     immediateWrite: true,
   });
+  console.trace('src/compiler/types/generate-app-types.ts#generateAppTypes() - write done!', JSON.stringify(writeResults,null,4))
   const hasComponentsDtsChanged = writeResults.changedContent;
 
   const componentsDtsRelFileName = relative(config.rootDir, componentsDtsFilePath);

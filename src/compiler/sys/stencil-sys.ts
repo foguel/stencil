@@ -525,7 +525,7 @@ export const createSystem = (c?: { logger?: Logger }) => {
       ? global?.fetch
       : undefined;
 
-  const writeFile = async (p: string, data: string) => writeFileSync(p, data);
+  const writeFile = async (p: string, data: string) => { console.trace(`src/compiler/sys/stencil-sys.ts#writeFile(${p})`); return writeFileSync(p, data); };
 
   const tmpDirSync = () => '/.tmp';
 

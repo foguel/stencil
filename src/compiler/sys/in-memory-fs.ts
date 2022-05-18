@@ -384,6 +384,7 @@ export const createInMemoryFs = (sys: d.CompilerSystem) => {
   };
 
   const writeFile = async (filePath: string, content: string, opts?: d.FsWriteOptions) => {
+    console.trace(`src/compiler/sys/in-memory-fs.ts#writeFile(${filePath})`);
     if (typeof filePath !== 'string') {
       throw new Error(`writeFile, invalid filePath: ${filePath}`);
     }

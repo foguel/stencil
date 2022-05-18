@@ -160,6 +160,7 @@ export const watch = (fs.watch = () => {
 });
 
 export const writeFile = (fs.writeFile = (p: string, data: string, opts: any, cb: any) => {
+  console.trace(`src/compiler/sys/modules/fs.ts#writeFile(${p})`);
   cb = typeof cb === 'function' ? cb : typeof opts === 'function' ? opts : null;
   fs.__sys
     .writeFile(p, data)
