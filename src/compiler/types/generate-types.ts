@@ -52,7 +52,7 @@ const generateTypesOutput = async (
 
       const originalDtsContent = await compilerCtx.fs.readFile(srcDtsFile.absPath);
       const distDtsContent = updateStencilTypesImports(outputTarget.typesDir, distPath, originalDtsContent);
-      // TODO: Perhpas this is it?
+      // TODO: Perhpas this is it? No - confirmed
       console.log(`src/compiler/types/generate-types.ts writing from relPath: ${relPath} (abs: ${srcDtsFile.absPath}) to distPath: ${distPath} which I now stored`)
       await compilerCtx.fs.writeFile(distPath, distDtsContent);
       distDtsFilePath = distPath;
@@ -63,7 +63,7 @@ const generateTypesOutput = async (
   console.trace('src/compiler/types/generate-types.ts#generateTypesOutput() - begin')
   await generateAppTypes(config, compilerCtx, buildCtx, distPath);
   console.log('src/compiler/types/generate-types.ts#generateTypesOutput() - initial complete')
-
+// Removed, not this either
   if (distDtsFilePath) {
     console.log('src/compiler/types/generate-types.ts#generateTypesOutput() - begin output targets')
     await generateCustomElementsTypes(config, compilerCtx, buildCtx, distDtsFilePath);
