@@ -28,13 +28,13 @@ export const generateTypes = async (
  * @param outputTarget the output target to generate types for
  */
 const generateTypesOutput = async (
-  config: d.Config,
-  compilerCtx: d.CompilerCtx,
+  _config: d.Config,
+  _compilerCtx: d.CompilerCtx,
   _buildCtx: d.BuildCtx,
   _outputTarget: d.OutputTargetDistTypes
 ): Promise<void> => {
   // get all type declaration files in a project's src/ directory
-  const srcDirItems = await compilerCtx.fs.readdir(config.srcDir, { recursive: false });
+  // const srcDirItems = await compilerCtx.fs.readdir(config.srcDir, { recursive: false });
   // const srcDtsFiles = srcDirItems.filter((srcItem) => srcItem.isFile && isDtsFile(srcItem.absPath));
 
   // Copy .d.ts files from src to dist
