@@ -1,8 +1,8 @@
 import type * as d from '../../declarations';
 import { dashToPascalCase, sortBy } from '@utils';
-import { generateEventTypes } from './generate-event-types';
-import { generateMethodTypes } from './generate-method-types';
-import { generatePropTypes } from './generate-prop-types';
+// import { generateEventTypes } from './generate-event-types';
+// import { generateMethodTypes } from './generate-method-types';
+// import { generatePropTypes } from './generate-prop-types';
 
 /**
  * Generate a string based on the types that are defined within a component
@@ -13,16 +13,16 @@ import { generatePropTypes } from './generate-prop-types';
  */
 export const generateComponentTypes = (
   cmp: d.ComponentCompilerMeta,
-  typeImportData: d.TypesImportData,
+  _typeImportData: d.TypesImportData,
   areTypesInternal: boolean
 ): d.TypesModule => {
   const tagName = cmp.tagName.toLowerCase();
   const tagNameAsPascal = dashToPascalCase(tagName);
   const htmlElementName = `HTML${tagNameAsPascal}Element`;
 
-  const propAttributes = generatePropTypes(cmp, typeImportData);
-  const methodAttributes = generateMethodTypes(cmp, typeImportData);
-  const eventAttributes = generateEventTypes(cmp, typeImportData, tagNameAsPascal);
+  const propAttributes: d.TypeInfo = []; // generatePropTypes(cmp, typeImportData);
+  const methodAttributes: d.TypeInfo = []; //generateMethodTypes(cmp, typeImportData);
+  const eventAttributes : d.TypeInfo = []; // generateEventTypes(cmp, typeImportData, tagNameAsPascal);
 
   const componentAttributes = attributesToMultiLineString(
     [...propAttributes, ...methodAttributes],
