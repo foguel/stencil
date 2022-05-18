@@ -1,7 +1,7 @@
 import type * as d from '../../declarations';
 import { copyStencilCoreDts, updateStencilTypesImports } from './stencil-types';
 import { join, relative } from 'path';
-import { generateAppTypes } from './generate-app-types';
+// import { generateAppTypes } from './generate-app-types';
 import { generateCustomElementsBundleTypes } from '../output-targets/dist-custom-elements-bundle/custom-elements-bundle-types';
 import { generateCustomElementsTypes } from '../output-targets/dist-custom-elements/custom-elements-types';
 import { isDtsFile } from '@utils';
@@ -59,9 +59,9 @@ const generateTypesOutput = async (
     })
   );
 
-  const distPath = outputTarget.typesDir;
-  console.trace('src/compiler/types/generate-types.ts#generateTypesOutput() - begin')
-  await generateAppTypes(config, compilerCtx, buildCtx, distPath);
+  // const distPath = outputTarget.typesDir;
+  // console.trace('src/compiler/types/generate-types.ts#generateTypesOutput() - begin')
+  // await generateAppTypes(config, compilerCtx, buildCtx, distPath);
   console.log('src/compiler/types/generate-types.ts#generateTypesOutput() - initial complete')
 // Removed, not this either
   if (distDtsFilePath) {
