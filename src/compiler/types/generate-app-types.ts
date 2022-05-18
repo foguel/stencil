@@ -38,6 +38,7 @@ export const generateAppTypes = async (
 
   if (!areTypesInternal) {
     componentsDtsFilePath = resolve(destination, GENERATED_DTS);
+    console.trace(`src/compiler/types/generate-app-types.ts#generateAppTypes() - types not internal - path ${componentsDtsFilePath}`)
     componentTypesFileContent = updateStencilTypesImports(
       destination,
       componentsDtsFilePath,
@@ -45,6 +46,7 @@ export const generateAppTypes = async (
     );
   }
 
+  // RYAN: Pretty sure this is the write that triggers the fileUpdate
   const writeResults = await compilerCtx.fs.writeFile(componentsDtsFilePath, componentTypesFileContent, {
     immediateWrite: true,
   });
@@ -52,6 +54,7 @@ export const generateAppTypes = async (
 
   const componentsDtsRelFileName = relative(config.rootDir, componentsDtsFilePath);
   if (hasComponentsDtsChanged) {
+    console.log(`generateAppTypes: ${componentsDtsRelFileName} has changed`);
     config.logger.debug(`generateAppTypes: ${componentsDtsRelFileName} has changed`);
   }
 
