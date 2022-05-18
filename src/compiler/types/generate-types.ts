@@ -53,7 +53,7 @@ const generateTypesOutput = async (
       const originalDtsContent = await compilerCtx.fs.readFile(srcDtsFile.absPath);
       const distDtsContent = updateStencilTypesImports(outputTarget.typesDir, distPath, originalDtsContent);
       // TODO: Perhpas this is it?
-      console.log(`src/compiler/types/generate-types.ts writing from relPath: ${relPath} to distPath: ${distPath} which I now stored`)
+      console.log(`src/compiler/types/generate-types.ts writing from relPath: ${relPath} (abs: ${srcDtsFile.absPath}) to distPath: ${distPath} which I now stored`)
       await compilerCtx.fs.writeFile(distPath, distDtsContent);
       distDtsFilePath = distPath;
     })
