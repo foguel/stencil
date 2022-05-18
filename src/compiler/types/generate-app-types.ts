@@ -19,7 +19,7 @@ import { updateStencilTypesImports } from './stencil-types';
  */
 export const generateAppTypes = async (
   config: d.Config,
-  compilerCtx: d.CompilerCtx,
+  _compilerCtx: d.CompilerCtx,
   buildCtx: d.BuildCtx,
   destination: string
 ): Promise<boolean> => {
@@ -49,11 +49,12 @@ export const generateAppTypes = async (
   }
 
   // RYAN: Pretty sure this is the write that triggers the fileUpdate
-  const writeResults = await compilerCtx.fs.writeFile(componentsDtsFilePath, componentTypesFileContent, {
-    immediateWrite: true,
-  });
-  console.trace('src/compiler/types/generate-app-types.ts#generateAppTypes() - write done!', JSON.stringify(writeResults,null,4))
-  const hasComponentsDtsChanged = writeResults.changedContent;
+  // const writeResults = await compilerCtx.fs.writeFile(componentsDtsFilePath, componentTypesFileContent, {
+  //   immediateWrite: true,
+  // });
+  // console.trace('src/compiler/types/generate-app-types.ts#generateAppTypes() - write done!', JSON.stringify(writeResults,null,4))
+  console.trace('src/compiler/types/generate-app-types.ts#generateAppTypes() - write skipped!')
+  const hasComponentsDtsChanged = true;
 
   const componentsDtsRelFileName = relative(config.rootDir, componentsDtsFilePath);
   if (hasComponentsDtsChanged) {
