@@ -1,7 +1,7 @@
 import type * as d from '../../declarations';
 import { basename, join, relative } from 'path';
 import { convertDecoratorsToStatic } from '../transformers/decorators-to-static/convert-decorators';
-// import { generateAppTypes } from '../types/generate-app-types';
+import { generateAppTypes } from '../types/generate-app-types';
 import { getComponentsFromModules, isOutputTargetDistTypes } from '../output-targets/output-utils';
 import { loadTypeScriptDiagnostics, normalizePath } from '@utils';
 import { resolveComponentDependencies } from '../entries/resolve-component-dependencies';
@@ -11,7 +11,6 @@ import { updateModule } from '../transformers/static-to-meta/parse-static';
 import { updateStencilTypesImports } from '../types/stencil-types';
 import { validateTranspiledComponents } from './validate-components';
 
-let haveTypesChanged = true;
 export const runTsProgram = async (
   config: d.Config,
   compilerCtx: d.CompilerCtx,
@@ -72,10 +71,9 @@ export const runTsProgram = async (
 
   // create the components.d.ts file and write to disk
   console.trace('src/compiler/transpile/run-program.ts#runTsProgram() - about to generate types')
-  // const haveTypesChanged = await generateAppTypes(config, compilerCtx, buildCtx, 'src');
+  const haveTypesChanged = await generateAppTypes(config, compilerCtx, buildCtx, 'src');
   console.log('src/compiler/transpile/run-program.ts#runTsProgram() - did types change:', haveTypesChanged)
   if (haveTypesChanged) {
-    haveTypesChanged = false;
     console.trace('src/compiler/transpile/run-program.ts#runTsProgram() - did types change:', haveTypesChanged)
     return true;
   }
