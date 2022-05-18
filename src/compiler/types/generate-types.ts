@@ -1,10 +1,5 @@
 import type * as d from '../../declarations';
-import { copyStencilCoreDts, updateStencilTypesImports } from './stencil-types';
-import { join, relative } from 'path';
-// import { generateAppTypes } from './generate-app-types';
-import { generateCustomElementsBundleTypes } from '../output-targets/dist-custom-elements-bundle/custom-elements-bundle-types';
-import { generateCustomElementsTypes } from '../output-targets/dist-custom-elements/custom-elements-types';
-import { isDtsFile } from '@utils';
+import { copyStencilCoreDts } from './stencil-types';
 
 /**
  * For a single output target, generate types, then copy the Stencil core type declaration file
@@ -35,39 +30,39 @@ export const generateTypes = async (
 const generateTypesOutput = async (
   config: d.Config,
   compilerCtx: d.CompilerCtx,
-  buildCtx: d.BuildCtx,
-  outputTarget: d.OutputTargetDistTypes
+  _buildCtx: d.BuildCtx,
+  _outputTarget: d.OutputTargetDistTypes
 ): Promise<void> => {
   // get all type declaration files in a project's src/ directory
   const srcDirItems = await compilerCtx.fs.readdir(config.srcDir, { recursive: false });
-  const srcDtsFiles = srcDirItems.filter((srcItem) => srcItem.isFile && isDtsFile(srcItem.absPath));
+  // const srcDtsFiles = srcDirItems.filter((srcItem) => srcItem.isFile && isDtsFile(srcItem.absPath));
 
   // Copy .d.ts files from src to dist
   // In addition, all references to @stencil/core are replaced
-  let distDtsFilePath: string;
-  await Promise.all(
-    srcDtsFiles.map(async (srcDtsFile) => {
-      const relPath = relative(config.srcDir, srcDtsFile.absPath);
-      const distPath = join(outputTarget.typesDir, relPath);
-
-      const originalDtsContent = await compilerCtx.fs.readFile(srcDtsFile.absPath);
-      const distDtsContent = updateStencilTypesImports(outputTarget.typesDir, distPath, originalDtsContent);
-      // TODO: Perhpas this is it? No - confirmed
-      console.log(`src/compiler/types/generate-types.ts writing from relPath: ${relPath} (abs: ${srcDtsFile.absPath}) to distPath: ${distPath} which I now stored`)
-      await compilerCtx.fs.writeFile(distPath, distDtsContent);
-      distDtsFilePath = distPath;
-    })
-  );
+  // let distDtsFilePath: string;
+  // await Promise.all(
+  //   srcDtsFiles.map(async (srcDtsFile) => {
+  //     const relPath = relative(config.srcDir, srcDtsFile.absPath);
+  //     const distPath = join(outputTarget.typesDir, relPath);
+  //
+  //     const originalDtsContent = await compilerCtx.fs.readFile(srcDtsFile.absPath);
+  //     const distDtsContent = updateStencilTypesImports(outputTarget.typesDir, distPath, originalDtsContent);
+  //     // TODO: Perhpas this is it? No - confirmed
+  //     console.log(`src/compiler/types/generate-types.ts writing from relPath: ${relPath} (abs: ${srcDtsFile.absPath}) to distPath: ${distPath} which I now stored`)
+  //     await compilerCtx.fs.writeFile(distPath, distDtsContent);
+  //     distDtsFilePath = distPath;
+  //   })
+  // );
 
   // const distPath = outputTarget.typesDir;
   // console.trace('src/compiler/types/generate-types.ts#generateTypesOutput() - begin')
   // await generateAppTypes(config, compilerCtx, buildCtx, distPath);
-  console.log('src/compiler/types/generate-types.ts#generateTypesOutput() - initial complete')
-// Removed, not this either
-  if (distDtsFilePath) {
-    console.log('src/compiler/types/generate-types.ts#generateTypesOutput() - begin output targets')
-    await generateCustomElementsTypes(config, compilerCtx, buildCtx, distDtsFilePath);
-    await generateCustomElementsBundleTypes(config, compilerCtx, buildCtx, distDtsFilePath);
-    console.log('src/compiler/types/generate-types.ts#generateTypesOutput() - end output targets')
-  }
+//   console.log('src/compiler/types/generate-types.ts#generateTypesOutput() - initial complete')
+// // Removed, not this either
+//   if (distDtsFilePath) {
+//     console.log('src/compiler/types/generate-types.ts#generateTypesOutput() - begin output targets')
+//     await generateCustomElementsTypes(config, compilerCtx, buildCtx, distDtsFilePath);
+//     await generateCustomElementsBundleTypes(config, compilerCtx, buildCtx, distDtsFilePath);
+//     console.log('src/compiler/types/generate-types.ts#generateTypesOutput() - end output targets')
+//   }
 };
